@@ -1,0 +1,4 @@
+{
+  "mongoUrl": "MONGO_URL",
+  "jwtPrivateKey": "JWT_PRIVATE_KEY"
+}
