@@ -63,7 +63,7 @@ sudo pip install setuptools
 sudo pip install docker-compose
 ```
 
-Note: Check if `docker-compose ps` command is working from inside the `pencil` directory.
+Note: Check if `docker-compose ps` command is working from inside the `mern-boilerplate` directory.
 
 ## Quick Start
 

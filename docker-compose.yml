@@ -4,9 +4,9 @@ volumes:
   mongo-data: {}
 
 services:
-  pencil_mongo:
+  mongo:
     image: mongo:latest
-    container_name: "pencil_mongo"
+    container_name: "mongo"
     restart: always
     volumes:
       - "mongo-data:/data/db"
