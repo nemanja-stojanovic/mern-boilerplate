@@ -1,0 +1,4 @@
+{
+  "mongoUrl": "mongodb://localhost/mern",
+  "jwtPrivateKey": "12345"
+}
