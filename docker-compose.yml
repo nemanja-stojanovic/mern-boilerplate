@@ -1,0 +1,19 @@
+version: "3"
+
+volumes:
+  mongo-data: {}
+
+services:
+  pencil_mongo:
+    image: mongo:latest
+    container_name: "pencil_mongo"
+    restart: always
+    volumes:
+      - "mongo-data:/data/db"
+    ports:
+      - 27017:27017
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379

@@ -33,6 +33,38 @@ In the development mode, we will have 2 servers running. The front end code will
 
 In the production mode, we will have only 1 server running. All the client side code will be bundled into static files using webpack and it will be served by the Node.js/Express application.
 
+## Setup local development environment in WINDOWS
+
+### Install `docker` and `docker-compose`
+
+[Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows) and install Docker Desktop for Windows.
+
+Now you may open the Command Prompt as administrator (right click on UI icon and select _Run as administrator_) and follow the steps in **Quick start** section.
+
+## Setup local development environment in LINUX
+
+### Install `docker`
+
+```bash
+# downlaod docker install script and install docker
+wget -qO- https://get.docker.com/ | sh
+# enable non-sudo access for docker
+sudo groupadd docker
+sudo usermod -aG docker $USER
+```
+
+Note: After docker is installed and non-sudo access is enabled try to execute `docker ps` command. If it doesn't work restart the machine.
+
+### Install `docker-compose`
+
+```bash
+sudo apt-get install build-essential python-dev python-pip
+sudo pip install setuptools
+sudo pip install docker-compose
+```
+
+Note: Check if `docker-compose ps` command is working from inside the `pencil` directory.
+
 ## Quick Start
 
 ```bash
@@ -41,6 +73,9 @@ git clone https://github.com/crsandeep/mern-boilerplate
 
 # Go inside the directory
 cd mern-boilerplate
+
+# Setup the local database
+sudo docker-compose up -d
 
 # Install dependencies
 yarn (or npm install)
