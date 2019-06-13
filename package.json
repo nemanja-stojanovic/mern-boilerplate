@@ -13,6 +13,7 @@
   "author": "Nemanja Stojanovic",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
     "babel-polyfill": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "config": "^3.1.0",
@@ -43,6 +44,7 @@
     "clean-webpack-plugin": "^1.0.0",
     "concurrently": "^4.0.0",
     "css-loader": "^2.0.0",
+    "debug": "^4.1.1",
     "eslint": "^5.0.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.11.0",
