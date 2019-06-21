@@ -29,6 +29,7 @@
     "lodash": "^4.17.11",
     "mongoose": "^5.5.14",
     "morgan": "^1.9.1",
+    "nodemailer": "^6.2.1",
     "rate-limiter-flexible": "^1.0.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",

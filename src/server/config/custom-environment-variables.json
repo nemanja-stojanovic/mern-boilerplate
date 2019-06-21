@@ -1,4 +1,7 @@
 {
+  "appDomain": "APP_DOMAIN",
   "mongoUrl": "MONGO_URL",
-  "jwtPrivateKey": "JWT_PRIVATE_KEY"
+  "jwtPrivateKey": "JWT_PRIVATE_KEY",
+  "adminEmailAddress": "ADMIN_EMAIL_ADDRESS",
+  "adminEmailPassword": "ADMIN_EMAIL_PASSWORD"
 }

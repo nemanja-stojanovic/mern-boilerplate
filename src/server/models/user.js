@@ -4,13 +4,7 @@ const config = require('config');
 const Joi = require('joi');
 
 const userSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    minlength: 1,
-    maxlength: 50,
-    required: true
-  },
-  lastName: {
+  name: {
     type: String,
     minlength: 1,
     maxlength: 50,
@@ -33,11 +27,12 @@ const userSchema = new mongoose.Schema({
   resetPasswordExpires: Number
 });
 
+// eslint-disable-next-line func-names
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     {
       _id: this._id,
-      firstName: this.firstName,
+      name: this.name,
     },
     config.get('jwtPrivateKey')
   );
@@ -48,11 +43,7 @@ const User = mongoose.model('User', userSchema);
 
 function validateUser(user) {
   const schema = {
-    firstName: Joi.string()
-      .min(1)
-      .max(50)
-      .required(),
-    lastName: Joi.string()
+    name: Joi.string()
       .min(1)
       .max(50)
       .required(),
@@ -71,4 +62,3 @@ function validateUser(user) {
 
 exports.User = User;
 exports.validate = validateUser;
-exports.userSchema = userSchema;

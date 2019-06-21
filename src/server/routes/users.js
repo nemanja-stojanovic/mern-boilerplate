@@ -1,9 +1,10 @@
 const bcrypt = require('bcryptjs');
+const express = require('express');
 const crypto = require('crypto');
 const _ = require('lodash');
-const express = require('express');
-const auth = require('../middleware/auth');
+const sendResetLink = require('../utils/sendResetLink');
 const { User, validate } = require('../models/user');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -20,14 +21,14 @@ router.post('/', async (req, res) => {
   if (user) return res.status(400).send('User with this email already registered.');
 
   user = new User(
-    _.pick(req.body, ['firstName', 'lastName', 'email', 'password'])
+    _.pick(req.body, ['name', 'email', 'password'])
   );
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
 
   const token = user.generateAuthToken();
-  return res.header('x-auth-token', token).send(_.pick(user, ['_id', 'firstName', 'email']));
+  return res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
 });
 
 router.put('/:id', async (req, res) => {
@@ -35,8 +36,7 @@ router.put('/:id', async (req, res) => {
     req.params.id,
     {
       $set: _.pick(req.body, [
-        'firstName',
-        'lastName',
+        'name',
         'email',
         'password'
       ])
@@ -45,7 +45,7 @@ router.put('/:id', async (req, res) => {
   );
 
   if (!user) return res.status(404).send('The user with given ID was not found.');
-  res.send(_.pick(user, ['_id', 'firstName', 'lastName', 'email']));
+  res.send(_.pick(user, ['_id', 'name', 'email']));
 });
 
 router.delete('/:id', async (req, res) => {
@@ -55,7 +55,7 @@ router.delete('/:id', async (req, res) => {
     return res.status(404).send('The user with given ID was not found.');
   }
 
-  res.send(_.pick(user, ['_id', 'firstName', 'lastName', 'email']));
+  res.send(_.pick(user, ['_id', 'name', 'email']));
 });
 
 router.post('/recovery', async (req, res) => {
@@ -75,7 +75,7 @@ router.post('/recovery', async (req, res) => {
   user.save();
 
   sendResetLink(user, token);
-  res.status(200).send(_.pick(user, ['_id', 'firstName', 'lastName', 'email']));
+  res.status(200).send(_.pick(user, ['_id', 'name', 'email']));
 });
 
 router.post('/check-token', async (req, res) => {
@@ -85,7 +85,7 @@ router.post('/check-token', async (req, res) => {
   }).select('_id');
 
   if (!user) return res.status(404).send('Password reset link is invalid or has expired.');
-  return res.status(200).send(_.pick(user, ['_id', 'firstName', 'lastName', 'email']));
+  return res.status(200).send(_.pick(user, ['_id', 'name', 'email']));
 });
 
 router.put('/reset/:id', async (req, res) => {
@@ -106,7 +106,7 @@ router.put('/reset/:id', async (req, res) => {
   );
 
   if (!user) return res.status(404).send('The user with given ID was not found.');
-  res.send(_.pick(user, ['_id', 'firstName', 'lastName', 'email']));
+  res.send(_.pick(user, ['_id', 'name', 'email']));
 });
 
 module.exports = router;

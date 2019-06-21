@@ -1,0 +1,7 @@
+{
+  "appDomain": "http://localhost:3000/",
+  "mongoUrl": "mongodb://localhost/mern",
+  "jwtPrivateKey": "dummy_development_key",
+  "adminEmailAddress": "",
+  "adminEmailPassword": ""
+}
